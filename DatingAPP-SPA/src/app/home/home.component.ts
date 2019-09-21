@@ -1,5 +1,6 @@
 import { Component, OnInit } from "@angular/core";
 import { HttpClient } from "@angular/common/http";
+import { AlertifyServiceService } from "../_services/AlertifyService.service";
 
 @Component({
   selector: "app-home",
@@ -10,7 +11,10 @@ export class HomeComponent implements OnInit {
   values: any = {};
   registerMode: boolean = false;
 
-  constructor(private httpClient: HttpClient) {}
+  constructor(
+    private httpClient: HttpClient,
+    private alertifyService: AlertifyServiceService
+  ) {}
 
   ngOnInit() {
     this.getValues();
@@ -26,7 +30,7 @@ export class HomeComponent implements OnInit {
         this.values = response;
       },
       error => {
-        console.log(error);
+        this.alertifyService.error(error);
       }
     );
   }

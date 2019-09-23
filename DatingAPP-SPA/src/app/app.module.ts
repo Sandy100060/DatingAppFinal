@@ -12,17 +12,37 @@ import { RegisterComponent } from "./register/register.component";
 import { ErrorInterceptorProvider } from "./_services/error.interceptor";
 import { AlertifyServiceService } from "./_services/AlertifyService.service";
 import { BsDropdownModule } from "ngx-bootstrap";
+import { MembersComponent } from "./members/members.component";
+import { MessagesComponent } from "./messages/messages.component";
+import { ListsComponent } from "./lists/lists.component";
+import { RouterModule } from "@angular/router";
+import { appRoutes } from "./routes";
+import { AuthGuard } from "./_guards/auth.guard";
 
 @NgModule({
-  declarations: [AppComponent, NavComponent, HomeComponent, RegisterComponent],
+  declarations: [
+    AppComponent,
+    NavComponent,
+    HomeComponent,
+    RegisterComponent,
+    MembersComponent,
+    MessagesComponent,
+    ListsComponent
+  ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
     FormsModule,
-    BsDropdownModule.forRoot()
+    BsDropdownModule.forRoot(),
+    RouterModule.forRoot(appRoutes)
   ],
-  providers: [AuthService, ErrorInterceptorProvider, AlertifyServiceService],
+  providers: [
+    AuthService,
+    ErrorInterceptorProvider,
+    AlertifyServiceService,
+    AuthGuard
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule {}
